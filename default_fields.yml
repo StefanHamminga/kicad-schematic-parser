@@ -1,0 +1,94 @@
+# These will be added to *every* non-power component
+defaults:
+    Populated: true
+Reference:
+    # Match based on reference minus digits. Every match is applied, not just the first.
+    /^(?!(TP|FD)).*/: # Anything not TP or FD
+        Fields:
+            MPN:
+            Alternative_MPNs:
+            Populated: true
+    /^DF|TP$/:
+        Fields:
+            Populated: false
+    /^C|R|D|FB$/: # Match some common stuff
+        Fields:
+            Footprint_Prefix:
+            Package: "1608"
+            Footprint_Density: B
+            Height:
+            Footprint_Postfix:
+    C: # Match any capacitor
+        Fields: # These will also be added to matched Component_Name fields
+            # Reference, Value, Footprint and Datasheet are always added.
+            Value_type: Capacitance
+            Tolerance: 10%
+            Voltage: 16V
+            Footprint_Library: SH_Capacitors
+            Spice_Primitive: C
+            Spice_Netlist_Enabled: true
+            Generate_Fields: Footprint
+        Component_Name:
+            # Match specific component names by string or regular expression:
+            /^CP/: # Match any Component_Name that starts with `CP`
+                Fields:
+                    ESR:
+                    Ripple_Current:
+                    Ripple_Current_Frequency:
+                    Lifetime: 2000h
+            /^(?!CP).*/:
+                Fields:
+                    Dielectric: X7R
+    R:
+        Fields: # These will also be added to matched Component_Name fields
+            # Reference, Value, Footprint and Datasheet are always added.
+            Value_type: Resistance
+            Tolerance: 5%
+            Footprint_Library: SH_Resistors
+            Spice_Primitive: R
+            Spice_Netlist_Enabled: true
+            Generate_Fields: Footprint
+    D:
+        Fields:
+            Tolerance: 10%
+            Current:
+        Component_Name:
+            /led/i:
+                Fields:
+                    Value_type: Label
+            /zener/i:
+                Fields:
+                    Value_type: Vz
+            /schottky|dsmall/i:
+                Fields:
+                    Value_type: If
+
+    L:
+        Fields:
+            Value_type: Inductance
+            Tolerance: ±20%
+            Current_Rating:
+            Saturation_Current:
+            DCR:
+            Shielded: true
+            Spice_Netlist_Enabled: true
+            Spice_Primitive: I
+    FB:
+        Fields:
+            Value_type: Impedance
+            Current_Rating:
+            DCR:
+            Spice_Netlist_Enabled: true
+            Spice_Primitive: I
+    K: # Relays
+        Fields:
+            Value_type: Product_Series
+            Contact_Form: SPDT
+            Current_Rating:
+            Switching_Voltage:
+            Coil_Type:
+            Coil_Voltage:
+            Coil_Current:
+    U:
+        Fields:
+            Value_type: Product_Series

@@ -1,0 +1,25 @@
+{
+  "name": "kicad-schematic-parser",
+  "version": "1.0.0",
+  "description": "Convert a KiCad schematic (.sch) file to a JavaScript data structure.",
+  "main": "kicad-schematic-parser.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "js-yaml": "^3.8.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "KiCad"
+  ],
+  "author": "Stefan Hamminga <stefan@prjct.net>",
+  "license": "LGPL-3.0",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/StefanHamminga/kicad-schematic-parser"
+  }
+}
